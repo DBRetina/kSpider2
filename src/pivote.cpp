@@ -35,7 +35,7 @@ void pivote(string index_prefex, set<int> allQs) {
         pivoted << "seq1\tseq2\tmin_kmers\t";
 
         for (auto const &Q : allQs) {
-            pivoted << delimiter << "Q" << (int) Q;
+            pivoted << delimiter << "Q_" << (int) Q;
             delimiter = "\t";
         }
         pivoted << "\n";
