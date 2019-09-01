@@ -35,13 +35,15 @@ int main(int argc, char **argv) {
     if (entered_manualQs) {
         std::stringstream ss(all_Qs);
         for (int i; ss >> i;) {
-            Qs_set.insert(i);
+            if(i > 4) Qs_set.insert(i);
             if (ss.peek() == ',')
                 ss.ignore();
         }
     } else if (entered_minQ && entered_maxQ && entered_stepQ) {
-        for (int Q = minQ; Q <= maxQ; Q += stepQ)
-            Qs_set.insert(Q);
+        for (int Q = minQ; Q <= maxQ; Q += stepQ){
+            if(Q > 4) Qs_set.insert(Q);
+        }
+            
     }
 
     // End Arguments parsing ----------------------------
