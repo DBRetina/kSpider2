@@ -7,15 +7,6 @@ import os
 import subprocess
 import errno
 
-KPROCESSOR = r"""
-  _    _____                                        
- | |  |  __ \                                       
- | | _| |__) | __ ___   ___ ___  ___ ___  ___  _ __ 
- | |/ /  ___/ '__/ _ \ / __/ _ \/ __/ __|/ _ \| '__|
- |   <| |   | | | (_) | (_|  __/\__ \__ \ (_) | |   
- |_|\_\_|   |_|  \___/ \___\___||___/___/\___/|_|                                                                                                        
-"""
-
 if sys.version_info[:2] < (3, 6):
     raise RuntimeError("Python version >=3.6")
 
@@ -150,9 +141,9 @@ class BuildPy(build_py):
         self.run_command('build_ext')
         super(build_py, self).run()
 
-setup(name='kSpider2',
+setup(name='kSpider2_retina',
       version="2.0.0",
-      description="""kSpider Python interface""",
+      description="""kSpider2_retina Python interface""",
       ext_modules=[kSpider_module],
       py_modules=['kSpider_internal'],
       packages=find_packages('pykSpider'),
@@ -161,7 +152,6 @@ setup(name='kSpider2',
       cmdclass={'build_py': BuildPy},
       license='BSD 3-Clause',
       long_description_content_type='text/markdown',
-      long_description=readme,
       classifiers=classifiers,
       install_requires=[
           'Click',
@@ -169,12 +159,8 @@ setup(name='kSpider2',
       include_package_data=True,
       entry_points='''
         [console_scripts]
-        kSpider2=kSpider2:cli
-    ''',
-      project_urls={
-          'Bug Reports': 'https://github.com/mr-eyes/kSpider2/issues',
-          'Source': 'https://github.com/mr-eyes/kSpider2/issues',
-      },
+        kSpider2_retina=kSpider2_retina:cli
+    '''
       )
 
 if os.path.exists("build/libkSpider.a") and os.path.islink("kSpider_BUILD_DIR"):
