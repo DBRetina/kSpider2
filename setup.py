@@ -47,6 +47,10 @@ def check_exist(dirs):
 SOURCES = [
     'src/swig_interfaces/kSpider_internal.i',
     'lib/kProcessor/src/kDataFrames/kDataFrame.cpp',
+    'lib/kProcessor/src/kDataFrames/colored_kDataFrame.cpp',
+    'lib/kProcessor/src/algorithms.cpp',
+
+
 ]
 
 if not find_executable('swig'):
@@ -61,6 +65,7 @@ INCLUDES = [
     'lib/kProcessor/ThirdParty/kmerDecoder/lib/kseq/include',
     'lib/kProcessor/ThirdParty/sdsl-lite/include',
     'lib/kProcessor/ThirdParty/kmerDecoder/lib/parallel-hashmap',
+    'lib/kProcessor/ThirdParty/ntCard/include',
 ]
 
 check_exist(INCLUDES)
@@ -82,6 +87,8 @@ LIBRARIES_DIRS = [
     f"{kSpider_BUILD_DIR_dir}/lib/kProcessor/ThirdParty/sdsl-lite/lib",
     f"{kSpider_BUILD_DIR_dir}/lib/kProcessor/ThirdParty/kmerDecoder",
     f"{kSpider_BUILD_DIR_dir}/lib/kProcessor/ThirdParty/MQF/ThirdParty/stxxl/lib",
+    "lib/kProcessor/ThirdParty/ntCard",
+
 ]
 
 check_exist(LIBRARIES_DIRS)
@@ -91,6 +98,7 @@ LIBRARIES = [
     'kSpider',
     'sdsl',
     'MQF',
+    'ntcard',
     'kmerDecoder',
     'stxxl_debug',
 ]
@@ -142,7 +150,7 @@ class BuildPy(build_py):
         super(build_py, self).run()
 
 setup(name='kSpider2_retina',
-      version="2.0.2",
+      version="2.0.3",
       description="""kSpider2_retina Python interface""",
       ext_modules=[kSpider_module],
       py_modules=['kSpider_internal'],

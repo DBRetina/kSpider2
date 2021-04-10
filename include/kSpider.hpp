@@ -9,5 +9,6 @@
 namespace kSpider{
 
 void pairwise(string index_prefix);
+void items_indexing(string items_file, string names_file, string index_prefix);
 
 };
