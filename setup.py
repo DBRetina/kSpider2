@@ -142,7 +142,7 @@ class BuildPy(build_py):
         super(build_py, self).run()
 
 setup(name='kSpider2_retina',
-      version="2.0.0",
+      version="2.0.1",
       description="""kSpider2_retina Python interface""",
       ext_modules=[kSpider_module],
       py_modules=['kSpider_internal'],
@@ -159,7 +159,7 @@ setup(name='kSpider2_retina',
       include_package_data=True,
       entry_points='''
         [console_scripts]
-        kSpider2_retina=kSpider2_retina:cli
+        kSpider2_retina=kSpider2:cli
     '''
       )
 
