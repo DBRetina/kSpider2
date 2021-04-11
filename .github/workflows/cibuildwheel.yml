@@ -21,7 +21,6 @@ jobs:
           linux-aarch64,
           linux-ppc64le,
           linux-s390x,
-          macos-x86_64,
         ]
         include:
           - build: linux-x86_64
@@ -40,10 +39,6 @@ jobs:
             os: ubuntu-18.04
             arch: s390x
             macos_target: ''
-          - build: macos-x86_64
-            os: macos-latest
-            arch: x86_64
-            macos_target: 'MACOSX_DEPLOYMENT_TARGET=10.11'
 
         py_version: [3.6, 3.7, 3.8, 3.9]
 
@@ -59,7 +54,7 @@ jobs:
         env:
           CIBW_BUILD_VERBOSITY: 3
           CIBW_PROJECT_REQUIRES_PYTHON: "~=${{ matrix.py_version }}"
-          CIBW_SKIP: "*-win32 *-manylinux_i686"
+          CIBW_SKIP: "*-win32 *-manylinux_i686 pp*"
           CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux2014_x86_64:latest
           CIBW_MANYLINUX_PPC64LE_IMAGE: quay.io/pypa/manylinux2014_ppc64le:latest
           CIBW_MANYLINUX_S390X_IMAGE: quay.io/pypa/manylinux2014_s390x:latest
@@ -79,7 +74,7 @@ jobs:
             yum install boost-devel -y
             yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel expat-devel
             cmake -BkSpider_BUILD_DIR
-            cmake --build kSpider_BUILD_DIR -j4
+            cmake --build kSpider_BUILD_DIR
 
 
       - uses: actions/upload-artifact@v2
