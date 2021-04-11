@@ -150,7 +150,7 @@ class BuildPy(build_py):
         super(build_py, self).run()
 
 setup(name='kSpider2_retina',
-      version="2.0.3",
+      version="2.0.4",
       description="""kSpider2_retina Python interface""",
       ext_modules=[kSpider_module],
       py_modules=['kSpider_internal'],
