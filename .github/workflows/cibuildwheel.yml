@@ -26,19 +26,19 @@ jobs:
           - build: linux-x86_64
             os: ubuntu-18.04
             arch: x86_64
-            macos_target: ''
+
           - build: linux-aarch64
             os: ubuntu-18.04
             arch: aarch64
-            macos_target: ''
+
           - build: linux-ppc64le
             os: ubuntu-18.04
             arch: ppc64le
-            macos_target: ''
+
           - build: linux-s390x
             os: ubuntu-18.04
             arch: s390x
-            macos_target: ''
+
 
     steps:
       - uses: actions/checkout@v2
@@ -57,9 +57,7 @@ jobs:
           CIBW_MANYLINUX_PPC64LE_IMAGE: quay.io/pypa/manylinux2014_ppc64le:latest
           CIBW_MANYLINUX_S390X_IMAGE: quay.io/pypa/manylinux2014_s390x:latest
           CIBW_MANYLINUX_AARCH64_IMAGE: quay.io/pypa/manylinux2014_aarch64:latest
-          CIBW_ENVIRONMENT_MACOS: ${{ matrix.macos_target }}
           CIBW_ARCHS_LINUX: ${{ matrix.arch }}
-          CIBW_ARCHS_MACOS: ${{ matrix.arch }}
           CIBW_BEFORE_ALL: |
             yum install bzip2 -y
             pip install --upgrade pip
@@ -92,7 +90,7 @@ jobs:
         with:
           path: 'wheels/'
 
-      - name: Publish package to TestPyPI
+      - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
