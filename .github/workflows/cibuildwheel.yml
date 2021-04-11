@@ -18,26 +18,26 @@ jobs:
       matrix:
         build: [
           linux-x86_64,
-          linux-aarch64,
+          # linux-aarch64,
           linux-ppc64le,
-          linux-s390x,
+          # linux-s390x,
         ]
         include:
           - build: linux-x86_64
             os: ubuntu-18.04
             arch: x86_64
 
-          - build: linux-aarch64
-            os: ubuntu-18.04
-            arch: aarch64
+          # - build: linux-aarch64
+          #   os: ubuntu-18.04
+          #   arch: aarch64
 
           - build: linux-ppc64le
             os: ubuntu-18.04
             arch: ppc64le
 
-          - build: linux-s390x
-            os: ubuntu-18.04
-            arch: s390x
+          # - build: linux-s390x
+          #   os: ubuntu-18.04
+          #   arch: s390x
 
 
     steps:
@@ -46,7 +46,6 @@ jobs:
           submodules: recursive
 
       - name: Set up QEMU
-        if: runner.os == 'Linux'
         uses: docker/setup-qemu-action@v1
         with:
           platforms: all
@@ -75,7 +74,7 @@ jobs:
             yum install boost-devel -y
             yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel expat-devel
             cmake -BkSpider_BUILD_DIR
-            cmake --build kSpider_BUILD_DIR -j4
+            cmake --build kSpider_BUILD_DIR -j1
 
 
       - uses: actions/upload-artifact@v2
