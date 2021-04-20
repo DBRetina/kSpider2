@@ -149,9 +149,9 @@ class BuildPy(build_py):
         self.run_command('build_ext')
         super(build_py, self).run()
 
-setup(name='kSpider2_retina',
-      version="2.0.4",
-      description="""kSpider2_retina Python interface""",
+setup(name='DBRetina',
+      version="2.0.5",
+      description="""DBRetina Python interface""",
       ext_modules=[kSpider_module],
       py_modules=['kSpider_internal'],
       packages=find_packages('pykSpider'),
@@ -167,7 +167,7 @@ setup(name='kSpider2_retina',
       include_package_data=True,
       entry_points='''
         [console_scripts]
-        kSpider2=kSpider2:cli
+        DBRetina=kSpider2:cli
     '''
       )
 
