@@ -18,27 +18,11 @@ jobs:
       matrix:
         build: [
           linux-x86_64,
-          # linux-aarch64,
-          linux-ppc64le,
-          # linux-s390x,
         ]
         include:
           - build: linux-x86_64
             os: ubuntu-18.04
             arch: x86_64
-
-          # - build: linux-aarch64
-          #   os: ubuntu-18.04
-          #   arch: aarch64
-
-          - build: linux-ppc64le
-            os: ubuntu-18.04
-            arch: ppc64le
-
-          # - build: linux-s390x
-          #   os: ubuntu-18.04
-          #   arch: s390x
-
 
     steps:
       - uses: actions/checkout@v2
@@ -46,6 +30,7 @@ jobs:
           submodules: recursive
 
       - name: Set up QEMU
+        if: runner.os == 'Linux'
         uses: docker/setup-qemu-action@v1
         with:
           platforms: all
