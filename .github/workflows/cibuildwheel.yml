@@ -10,30 +10,18 @@ on:
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}-${{ matrix.arch }}
+    name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     if: "!contains(github.event.head_commit.message, 'ci_skip')"
     strategy:
-      fail-fast: false
       matrix:
-        build: [
-          linux-x86_64,
-        ]
-        include:
-          - build: linux-x86_64
-            os: ubuntu-18.04
-            arch: x86_64
+        os: [ ubuntu-18.04 ] # , windows-2019, macos-10.15 ]
 
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      # - name: Set up QEMU
-      #   if: runner.os == 'Linux'
-      #   uses: docker/setup-qemu-action@v1
-      #   with:
-      #     platforms: all
 
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
@@ -42,11 +30,8 @@ jobs:
           CIBW_BUILD_VERBOSITY: 3
           CIBW_BUILD: cp36-manylinux* cp37-manylinux* cp38-manylinux* cp39-manylinux*
           CIBW_SKIP: "*-win32 *-manylinux_i686 pp*"
-          # CIBW_MANYLINUX_PPC64LE_IMAGE: quay.io/pypa/manylinux2014_ppc64le:latest
-          # CIBW_MANYLINUX_S390X_IMAGE: quay.io/pypa/manylinux2014_s390x:latest
-          # CIBW_MANYLINUX_AARCH64_IMAGE: quay.io/pypa/manylinux2014_aarch64:latest
-          # CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux2014_x86_64:latest
-          CIBW_ARCHS_LINUX: ${{ matrix.arch }}
+          CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux2014_x86_64:latest
+          CIBW_ARCHS_LINUX: x86_64
           CIBW_BEFORE_ALL: |
             yum install bzip2 -y
             pip install --upgrade pip
